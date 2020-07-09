@@ -10,13 +10,12 @@ end
 
 def handle5(list)
   puts "Combien y a t-il de handle contenant 5 caractères ? (hors @)"
-  puts "Il y a #{list.select {|elem| elem.length == 6}.size} handles avec 5 caractères"
+  puts "Il y a #{list.count {|elem| elem.length == 6}} handles avec 5 caractères"
 end
 
 def handle_maj(list)
   puts "Combien y a t-il de handles commençant par une majuscule ?"
-  # enlever ceux qui commencent par caractères spéciaux
-  puts "Il y a #{list.select {|elem| (elem[1] == elem[1].upcase && (elem[1] != '_')) || (elem[1] == '_' && elem[2] == elem[2].upcase)}.size} handles dont la première lettre est une masjuscule"
+  puts "Il y a #{list.count { |elem| elem[1] == elem[1].upcase }} handles commençant par une majuscule"
 end
 
 def handle_alphabetic_order(list)
@@ -38,7 +37,7 @@ def handle_div(list)
   puts "Voici la liste rangé selon la taille des éléments"
   size = 4
   #puts list.max {|a,b| a.size <=> b.size}.size
-  while size <= 33
+  while size <= list.max {|a,b| a.size <=> b.size }.size
     if list.select {|elem| elem.size == size}.size == 1
       puts "Il y a #{list.select {|elem| elem.size == size}.size} handle qui fait #{size} caractères"
     elsif list.select {|elem| elem.size == size}.size > 0
