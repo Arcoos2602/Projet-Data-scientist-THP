@@ -16,8 +16,36 @@ end
 def handle_maj(array)
   puts "Combien y a t-il de handles commençant par une majuscule ?"
   # enlever ceux qui commencent par caractères spéciaux
-  #array.reject {|elem| elem[2] == }
-  #puts "Il y a #{array.select {|elem| elem[2] == elem[2].upcase}.size} commençant par une majuscule"
+  puts "Il y a #{array.select {|elem| (elem[1] == elem[1].upcase && (elem[1] != '_')) || (elem[1] == '_' && elem[2] == elem[2].upcase)}.size} handles dont la première lettre est une masjuscule"
+end
+
+def handle_alphabetic_order(array)
+  puts "Voici le liste trié dans l'ordre alphabétique :"
+  puts array.sort { |a, b| a.downcase <=> b.downcase}
+end
+
+def handle_size_order(array)
+  puts "Voici la liste trié par rapport à leur taille (croissant)"
+  puts array.sort { |a, b| a.length <=> b.length}
+end
+
+def handle_epenser(array)
+  puts "Quelle est la postion de @epenser dans la liste ?"
+  puts "La position de @epenser dans la liste est #{array.index("@epenser")}"
+end
+
+def handle_div(array)
+  puts "Voici la liste rangé selon la taille des éléments"
+  size = 4
+  #puts array.max {|a,b| a.size <=> b.size}.size
+  while size <= 33
+    if array.select {|elem| elem.size == size}.size == 1
+      puts "Il y a #{array.select {|elem| elem.size == size}.size} handle qui fait #{size} caractères"
+    elsif array.select {|elem| elem.size == size}.size > 0
+      puts "Il y a #{array.select {|elem| elem.size == size}.size} handles qui font #{size} caractères"
+    end
+    size += 1
+  end
 end
 
 def perform
@@ -26,6 +54,10 @@ def perform
   shortest_handle(array)
   handle5(array)
   handle_maj(array)
+  handle_alphabetic_order(array)
+  handle_size_order(array)
+  handle_epenser(array)
+  handle_div(array)
 end
 
 perform
